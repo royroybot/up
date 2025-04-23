@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Link Tracker</title>
+</head>
+<body>
+    <h1>Buat Link Pelacak</h1>
+    <form id="linkForm">
+        <input type="text" id="originalUrl" placeholder="Masukkan URL tujuan" required>
+        <button type="submit">Buat Link Pelacak</button>
+    </form>
+    
+    <div id="trackedLink" style="display:none;">
+        <p>Salin link berikut dan kirim ke target:</p>
+        <a id="generatedLink" href="" target="_blank"></a>
+    </div>
+
+    <script>
+        document.getElementById('linkForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const originalUrl = document.getElementById('originalUrl').value;
+            const encodedUrl = encodeURIComponent(originalUrl);
+            const trackedUrl = window.location.href.replace('index.html', '') + 'redirect.php?url=' + encodedUrl;
+            
+            document.getElementById('generatedLink').href = trackedUrl;
+            document.getElementById('generatedLink').textContent = trackedUrl;
+            document.getElementById('trackedLink').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
